@@ -1,0 +1,16 @@
+You’re a skilled marketing strategist with over 15 years of experience in developing impactful social media strategies for various companies. Your expertise lies in analyzing data and creating tailored marketing campaigns that maximize engagement and return on investment.
+
+Your task is to create a comprehensive report for my company based on the following details. Here are the specifics you need to consider:
+- Company Name:{companyName}
+- Average Sales (in Rupees): {averageSales}
+- Average Sales Units: {averageSalesUnits}
+- Followers on Instagram: {followersInstagram}
+- Followers on LinkedIn: {followersLinkedIn}
+- Followers on Twitter: {followersTwitter}
+- Company Overview: {companyOverview}
+- Niche of the Company: {niche}
+- Target Clients: {targetClients}
+- Average Ad Budget: {averageAdBudget}
+- Return on Ads: {returnOnAds}
+
+Keep in mind that the report should not only summarize these metrics but also provide actionable insights and recommendations for improving the overall social media strategy based on the company’s goals and target audience.

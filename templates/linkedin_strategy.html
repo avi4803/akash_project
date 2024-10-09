@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Growth Strategy</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6f2828;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background: rgb(165, 41, 41);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        form input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        form button {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            color: rgb(11, 11, 11);
+            background-color: #a00e0e;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        form button:hover {
+            background-color: #440811;
+        }
+        #strategy-output {
+            max-width: 600px;
+            margin: auto;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgb(232, 76, 76);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .heading {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .content {
+            margin: 10px 0;
+        }
+        .download-link {
+            color: #440811;
+        }
+    </style>
+</head>
+<body>
+    <h1>Linkedin Strategy Strategy</h1>
+    <form id="linkedin-strategy-form">
+        <!-- Include your form fields here -->
+        <label for="companyName">Company Name:</label>
+        <input type="text" id="companyName" name="companyName" required>
+        <label for="averageSales">Average Sales (in Rupees):</label>
+        <input type="text" id="averageSales" name="averageSales" required>
+        <label for="averageSalesUnits">Average Sales Units:</label>
+        <input type="text" id="averageSalesUnits" name="averageSalesUnits" required>
+        <label for="followersInstagram">Followers on Instagram:</label>
+        <input type="text" id="followersInstagram" name="followersInstagram" required>
+        <label for="followersLinkedIn">Followers on LinkedIn:</label>
+        <input type="text" id="followersLinkedIn" name="followersLinkedIn" required>
+        <label for="followersTwitter">Followers on Twitter:</label>
+        <input type="text" id="followersTwitter" name="followersTwitter" required>
+        <label for="companyOverview">Company Overview:</label>
+        <input type="text" id="companyOverview" name="companyOverview" required>
+        <label for="niche">Niche of the Company:</label>
+        <input type="text" id="niche" name="niche" required>
+        <label for="targetClients">Target Clients:</label>
+        <input type="text" id="targetClients" name="targetClients" required>
+        <label for="averageAdBudget">Average Ad Budget:</label>
+        <input type="text" id="averageAdBudget" name="averageAdBudget" required>
+        <label for="returnOnAds">Return on Ads:</label>
+        <input type="text" id="returnOnAds" name="returnOnAds" required>
+        <button type="submit">Generate Strategy</button>
+    </form>
+    <div id="strategy-output"></div>
+    <script>
+        document.getElementById('linkedin-strategy-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const formData = {
+                companyName: document.getElementById('companyName').value,
+                averageSales: document.getElementById('averageSales').value,
+                averageSalesUnits: document.getElementById('averageSalesUnits').value,
+                followersInstagram: document.getElementById('followersInstagram').value,
+                followersLinkedIn: document.getElementById('followersLinkedIn').value,
+                followersTwitter: document.getElementById('followersTwitter').value,
+                companyOverview: document.getElementById('companyOverview').value,
+                niche: document.getElementById('niche').value,
+                targetClients: document.getElementById('targetClients').value,
+                averageAdBudget: document.getElementById('averageAdBudget').value,
+                returnOnAds: document.getElementById('returnOnAds').value
+            };
+            try {
+                const response = await fetch('/linkedin-strategy', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formData)
+                });
+                const result = await response.json();
+                const content = result.strategy; // Assuming result.strategy contains the raw content
+                const formattedContent = formatContent(content);
+                document.getElementById('strategy-output').innerHTML = formattedContent +`
+                    <a class="download-link" id="download-link" href="/pdfs/${result.pdf_filename}" download>Download PDF</a>
+                `;
+            } catch (error) {
+                document.getElementById('strategy-output').innerHTML = `<p style="color: red;">An error occurred: ${error.message}</p>`;
+            }
+        });
+        function formatContent(content) {
+            // Define regex pattern to remove ** from the content
+    const removeBoldPattern = /\*\*/g;
+
+// Remove ** from content
+let cleanedContent = content.replace(removeBoldPattern, '');
+
+// Split content by newlines
+const lines = cleanedContent.split('\n');
+let html = '';
+let currentHeading = '';
+
+lines.forEach(line => {
+    if (line.includes(':')) {
+        // Heading detected
+        const [heading, text] = line.split(':');
+        currentHeading = heading.trim();
+        html += `<div class="heading">${currentHeading}</div><div class="content">${text.trim()}</div>`;
+    } else if (line.startsWith('-')) {
+        // Bullet point
+        html += `<div class="content"><strong>-</strong> ${line.substring(1).trim()}</div>`;
+    } else {
+        // Regular text
+        if (currentHeading) {
+            html += `<div class="content">${line.trim()}</div>`;
+        }
+    }
+});
+
+return html;
+}
+    </script>
+</body>
+</html>

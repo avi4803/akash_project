@@ -1,0 +1,15 @@
+Flask==2.2.3
+Werkzeug==2.3.3
+Flask-Cors==3.0.10
+Flask-SQLAlchemy==2.5.1
+Flask-Migrate==3.1.0
+requests==2.31.0
+pandas==1.5.3
+cohere==2.0.0
+reportlab==3.6.11
+PyPDF2==1.26.0
+openpyxl==3.0.10
+aiohttp==3.9.5
+beautifulsoup4==4.12.2
+Jinja2==3.1.2
+gunicorn==21.2.0  # You can specify the version you want or leave it blank for the latest

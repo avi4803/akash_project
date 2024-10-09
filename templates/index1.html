@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Design with Loader</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #1b1d25;
+        color: white;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(
+          to right,
+          #7b0505 0%,
+          #000000 50%,
+          #01063b 100%
+        );
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .container {
+        z-index: 1;
+        text-align: center;
+        position: relative;
+        max-width: 800px;
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+
+      h1 {
+        font-size: 70px;
+        color: #ffffff;
+        position: absolute;
+        right: -650px;
+        transform: translateY(-100%);
+        white-space: nowrap;
+        overflow: hidden;
+        z-index: 2;
+        opacity: 0;
+        animation: fadeIn 2s ease forwards;
+        animation-delay: 2.5s;
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      /* General button styles */
+      .button {
+        width: 200px;
+        min-height: 50px;
+        padding: 5px;
+        border-radius: 25px;
+        font-size: 18px;
+        color: white;
+        font-weight: bold;
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        text-align: center;
+        background-color: #f61936;
+        opacity: 0;
+        overflow: hidden;
+      }
+
+      .button svg {
+        width: 100%;  /* Full width of the button */
+        height: 100%; /* Full height of the button */
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .button rect {
+        padding: 5px;
+        border-radius: 25px;
+        width: 100%;
+        height: 100%;
+        fill: none;
+        stroke: #f61936;
+        stroke-width: 2;
+        stroke-dasharray: 422, 0;
+        transition: all 0.35s linear;
+      }
+
+      /* Hover effect */
+      .button:hover {
+        background: rgba(246, 25, 54, 0);
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+
+      .button:hover rect {
+        stroke-width: 5;
+        stroke-dasharray: 15, 310;
+        stroke-dashoffset: 48;
+        transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+
+      /* Animation for buttons falling from the top */
+      @keyframes fallFromTop {
+        0% {
+          transform: translateY(-100vh);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Animation for buttons rising from the bottom */
+      @keyframes riseFromBottom {
+        0% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      /* Apply the animation to the buttons */
+      .fall {
+        animation: fallFromTop 1s ease forwards;
+      }
+
+      .rise {
+        animation: riseFromBottom 1s ease forwards;
+      }
+
+      /* Button positions and individual animations */
+      .btn-ask-question {
+        top: -320px;
+        left: -250px;
+        animation-delay: 0.2s;
+      }
+
+      .btn-button {
+        top: -200px;
+        left: -340px;
+        animation-delay: 0.4s;
+      }
+
+      .btn-publish {
+        top: -80px;
+        left: -450px;
+        animation-delay: 0.6s;
+      }
+
+      .btn-pay {
+        top: 40px;
+        left: -450px;
+        animation-delay: 0.8s;
+      }
+
+      .btn-reverse {
+        top: 150px;
+        left: -350px;
+        animation-delay: 1s;
+      }
+
+      .btn-ln {
+        top: 260px;
+        left: -235px;
+        animation-delay: 1.2s;
+      }
+
+      /* Loader Styles */
+      .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid #f61936;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        z-index: 100;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Overlay to make background opaque during loader */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 99;
+        display: none;
+      }
+
+      /* Motion container for button group */
+      .Motion {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translate(-50px, 0px);
+        transition: transform 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="Action">Choose Your Action</h1>
+      <div class="Motion">
+        
+        <div class="button btn-button fall" onclick="showLoader(event, '/business-growth')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60">
+                <rect x="0" y="0" width="220" height="60"></rect>
+            </svg>
+            Business Growth Strategy
+        </div>
+        <div class="button btn-button fall">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+            <rect x="0" y="0" width="200" height="50"></rect>
+          </svg>
+          <a href="../HTML/Business_growth(1).html" onclick="showLoader(event, '../Business_growth(1).html')">Business Queries</a>
+        </div>
+        <div class="button btn-publish fall">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+            <rect x="0" y="0" width="200" height="50"></rect>
+          </svg>
+          <a href="../HTML/Business_growth(1).html" onclick="showLoader(event, '../Business_growth(1).html')">Lead Generation</a>
+        </div>
+        <div class="button btn-pay rise">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+            <rect x="0" y="0" width="200" height="50"></rect>
+          </svg>
+          <a href="../HTML/Business_growth(1).html" onclick="showLoader(event, '../Business_growth(1).html')">Funding Pitch</a>
+        </div>
+        <div class="button btn-reverse rise">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+            <rect x="0" y="0" width="200" height="50"></rect>
+          </svg>
+          <a href="../HTML/Business_growth(1).html" onclick="showLoader(event, '../Business_growth(1).html')">Social Media Strategy</a>
+        </div>
+        <div class="button btn-ln rise">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
+            <rect x="0" y="0" width="200" height="50"></rect>
+          </svg>
+          <a href="../HTML/Business_growth(1).html" onclick="showLoader(event, '../Business_growth(1).html')">LinkedIn Strategy</a>
+        </div>
+      </div>
+      <div class="loader" id="loader"></div> <!-- Loader Element -->
+      <div class="overlay" id="overlay"></div> <!-- Overlay Element -->
+    </div>
+
+    <script>
+      function showLoader(event, link) {
+        event.preventDefault(); // Prevent the default link behavior
+        var loader = document.getElementById("loader");
+        var overlay = document.getElementById("overlay");
+
+        // Show the loader and overlay
+        loader.style.display = "block";
+        overlay.style.display = "block";
+
+        // After 2 seconds, redirect to the specified link
+        setTimeout(function () {
+          window.location.href = link;
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
