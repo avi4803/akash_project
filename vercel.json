@@ -11,5 +11,17 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ]
+  ],
+  "env": {
+    "PYTHON_VERSION": "3.10"
+  },
+  "build": {
+    "env": {
+      "DEBIAN_FRONTEND": "noninteractive"
+    },
+    "postinstall": [
+      "apt-get update",
+      "apt-get install -y libfreetype6-dev libpng-dev" 
+    ]
+  }
 }
