@@ -178,7 +178,7 @@ def add_content_to_pdf(template_path, content, output_path,title):
     os.remove(temp_pdf_path)
     print(f"PDF successfully saved at: {output_path}")
 
-@app.route('/business-growth', methods=['GET', 'POST'])
+@app.route('./business-growth', methods=['GET', 'POST'])
 def business_growth():
     if request.method == 'POST':
         data = request.json
@@ -200,7 +200,7 @@ def business_growth():
         return jsonify({'strategy': strategy, 'pdf_filename': unique_filename})
     return render_template('business_growth.html')
 
-@app.route('/lead-generation', methods=['GET', 'POST'])
+@app.route('./lead-generation', methods=['GET', 'POST'])
 def lead_generation():
     if request.method == 'POST':
         data = request.json
@@ -221,7 +221,7 @@ def lead_generation():
         return jsonify({'strategy': strategy, 'pdf_filename': unique_filename})
     return render_template('lead_generation.html')
 
-@app.route('/funding-pitch', methods=['GET', 'POST'])
+@app.route('./funding-pitch', methods=['GET', 'POST'])
 def funding_pitch():
     if request.method == 'POST':
         data = request.json
@@ -243,7 +243,7 @@ def funding_pitch():
         return jsonify({'strategy': strategy, 'pdf_filename':unique_filename})
     return render_template('funding_pitch.html')
 
-@app.route('/social-media-strategy', methods=['GET', 'POST'])
+@app.route('./social-media-strategy', methods=['GET', 'POST'])
 def social_media_strategy():
     if request.method == 'POST':
         data = request.json
@@ -263,7 +263,7 @@ def social_media_strategy():
         return jsonify({'strategy': strategy, 'pdf_filename': unique_filename})
     return render_template('social_media_strategy.html')
 
-@app.route('/business-queries', methods=['GET', 'POST'])
+@app.route('./business-queries', methods=['GET', 'POST'])
 def business_queries():
     if request.method == 'POST':
         data = request.json
@@ -283,7 +283,7 @@ def business_queries():
         return jsonify({'strategy': strategy, 'pdf_filename': unique_filename})
     return render_template('business_queries.html')
 
-@app.route('/linkedin-strategy', methods=['GET', 'POST'])
+@app.route('./linkedin-strategy', methods=['GET', 'POST'])
 def linkedin_strategy():
     if request.method == 'POST':
         data = request.json
