@@ -198,7 +198,7 @@ def business_growth():
         add_content_to_pdf('template.pdf', strategy, pdf_path,title)
 
         return jsonify({'strategy': strategy, 'pdf_filename': unique_filename})
-    return render_template('./business_growth.html')
+    return render_template('/templates/business_growth.html')
 
 @app.route('/lead-generation', methods=['GET', 'POST'])
 def lead_generation():
