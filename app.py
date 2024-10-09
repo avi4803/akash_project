@@ -156,6 +156,7 @@ def add_content_to_pdf(template_path, content, output_path,title):
     
     # Here would be the code to merge the content with the template PDF, 
     # which is not repeated to focus on the bold text formatting.
+    
 
     template_reader = PdfReader(template_path)
     content_reader = PdfReader(temp_pdf_path)
@@ -213,7 +214,6 @@ def lead_generation():
         pdf_filename = 'lead_generation.pdf'
 
         unique_filename = generate_unique_filename(pdf_filename)
-        # Save the PDF to a file
         pdf_path = os.path.join('pdfs', unique_filename)
         title="Lead Generation Strategy"
         add_content_to_pdf('template.pdf', strategy, pdf_path,title)
